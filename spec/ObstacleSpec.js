@@ -7,7 +7,6 @@ describe("an Obstacle", function(){
 	it("should have a default location", function(){
 	    var wall = new Wish.Wall();
 
-	    expect(wall.get("x")).toBe(0);
 	    expect(wall).toBeLocatedAt(0);
 	})
 
@@ -48,5 +47,29 @@ describe("an Obstacle", function(){
 	    expect(ball).toHaveVelocity({ vx : 3, vy : 0 });
 	});
 
+    });
+
+    describe("(a Ceiling)", function(){
+	it("should be defined", function(){
+	    expect(Wish.Ceiling).toBeDefined();
+	});
+
+	it("should bounce back balls from below", function(){
+	    var ball = new Wish.Ball({ velocity : { vx : 0, vy : 1 } });
+	    new Wish.Ceiling({ y : 1 }).observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx : 0, vy : -1 });
+	});
+
+	it("should bounce back high velocity balls from below", function(){
+	    var ball = new Wish.Ball({ velocity : { vx : 0, vy : 3 } });
+	    new Wish.Ceiling({ y : 4 }).observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx : 0, vy : -3 });
+	});
     });
 });
