@@ -72,4 +72,22 @@ describe("an Obstacle", function(){
 	    expect(ball).toHaveVelocity({ vx : 0, vy : -3 });
 	});
     });
+
+    describe("(a Brick)", function(){
+	it("should be  defined", function(){
+	    expect(Wish.Brick).toBeDefined();
+	});
+	
+	it("should have a default position", function(){
+	    var brick = new Wish.Brick();
+
+	    expect(brick).toBeAt({ x: 0, y: 0});
+	});
+
+	it("should have a default extend", function(){
+	    var brick = new Wish.Brick();
+
+	    expect(brick).toHaveExtend({ width : 5, height: 3 });
+	});
+    });
 });

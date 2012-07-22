@@ -70,6 +70,15 @@
 	}
     });
 
+    var Brick = Obstacle.extend({
+	defaults : {
+	    "position" : { x: 0, y:0 },
+	    "extend" : { width: 5, height: 3 }
+	}
+	
+    });
+
     Wish.Wall = Wall;
     Wish.Ceiling = Ceiling;
+    Wish.Brick = Brick;
 })(_, Backbone, Wish);

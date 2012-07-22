@@ -13,6 +13,11 @@ beforeEach(function() {
 	toBeLocatedAt : function(expectedLocation){
 	    actualLocation = this.actual.get("x");
 	    return actualLocation === expectedLocation;
+	},
+
+	toHaveExtend : function(expectedExtend){
+	    actualExtend = this.actual.get("extend");
+	    return actualExtend.width === expectedExtend.width && actualExtend.height === expectedExtend.height;
 	}
     });
 });
