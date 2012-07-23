@@ -1,4 +1,16 @@
 (function(_, Backbone, Wish, undefined){
+    var is = function(target){
+	return {
+	    reachableFrom : function(origin){
+		return {
+		    withSpeed : function(speed){
+			return Math.abs(origin - target) <= Math.abs(speed);
+		    }
+		};
+	    }
+	};
+    };
+
     var Obstacle = Backbone.Model.extend({
 	observe : function(aBall){
 	    aBall.bind("change:position", function(ball){
@@ -77,10 +89,24 @@
 	},
 
 	isHitBy : function(aBall) {
+	    return (aBall.isHeadingRight() && this.isHitFromTheLeftBy(aBall)) ||
+		(aBall.isHeadingLeft() && this.isHitFromTheRightBy(aBall));
+	},
+
+	isHitFromTheRightBy : function(aBall){
  	    var position = this.get("position");
 	    var extend = this.get("extend");
 	    var ballPosition = aBall.get("position");
-	    return Math.abs(ballPosition.y - position.y) <= extend.height/2;
+	    var ballVelocity = aBall.get("velocity");
+	    return is(position.x + extend.width/2).reachableFrom(ballPosition.x).withSpeed(ballVelocity.vx) && Math.abs(ballPosition.y - position.y) <= extend.height/2;
+	},
+
+	isHitFromTheLeftBy : function(aBall){
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    var ballPosition = aBall.get("position");
+	    var ballVelocity = aBall.get("velocity");
+	    return is(position.x - extend.width/2).reachableFrom(ballPosition.x).withSpeed(ballVelocity.vx) && Math.abs(ballPosition.y - position.y) <= extend.height/2;
 	},
 
 	change : function(aBall) {

@@ -149,5 +149,23 @@ describe("an Obstacle", function(){
 
 	    expect(ball).toHaveVelocity({ vx: -1, vy: 0 });
 	});
+
+	it("should let balls out of range moving left pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 10, y: 0 }, "velocity" : { vx: -1, vy: 0  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: -1, vy: 0 });
+	});
+
+	it("should let balls out of range moving right pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 1, y: 0 }, "velocity" : { vx: 1, vy: 0  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 1, vy: 0 });
+	});
     });
 });
