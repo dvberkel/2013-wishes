@@ -1,10 +1,10 @@
 (function(_, Backbone, Wish, undefined){
     var is = function(target){
 	return {
-	    reachableFrom : function(origin){
+	    within : function(epsilon){
 		return {
-		    withSpeed : function(speed){
-			return Math.abs(origin - target) <= Math.abs(speed);
+		    of : function(origin){
+			return Math.abs(target - origin) <= Math.abs(epsilon);
 		    }
 		};
 	    }
@@ -98,7 +98,13 @@
 	    var extend = this.get("extend");
 	    var ballPosition = aBall.get("position");
 	    var ballVelocity = aBall.get("velocity");
-	    return is(position.x + extend.width/2).reachableFrom(ballPosition.x).withSpeed(ballVelocity.vx) && Math.abs(ballPosition.y - position.y) <= extend.height/2;
+	    return is(this.rightExtend()).within(ballVelocity.vx).of(ballPosition.x) && is(ballPosition.y).within(extend.height/2).of(position.y);
+	},
+
+	rightExtend : function(){
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    return position.x + extend.width/2;
 	},
 
 	isHitFromTheLeftBy : function(aBall){
@@ -106,7 +112,13 @@
 	    var extend = this.get("extend");
 	    var ballPosition = aBall.get("position");
 	    var ballVelocity = aBall.get("velocity");
-	    return is(position.x - extend.width/2).reachableFrom(ballPosition.x).withSpeed(ballVelocity.vx) && Math.abs(ballPosition.y - position.y) <= extend.height/2;
+	    return is(this.leftExtend()).within(ballVelocity.vx).of(ballPosition.x) && is(ballPosition.y).within(extend.height/2).of(position.y);
+	},
+
+	leftExtend : function(){
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    return position.x - extend.width/2;
 	},
 
 	change : function(aBall) {
