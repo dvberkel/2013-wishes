@@ -74,6 +74,12 @@ describe("an Obstacle", function(){
     });
 
     describe("(a Brick)", function(){
+	var brick;
+
+	beforeEach(function(){
+	    brick = new Wish.Brick({ "position" : { x: 0, y: 0 }, "extend" : { width: 1, height: 1} });
+	});
+
 	it("should be  defined", function(){
 	    expect(Wish.Brick).toBeDefined();
 	});
@@ -88,6 +94,60 @@ describe("an Obstacle", function(){
 	    var brick = new Wish.Brick();
 
 	    expect(brick).toHaveExtend({ width : 5, height: 3 });
+	});
+
+	it("should bounce back balls from the left", function(){
+	    var ball = new Wish.Ball({ "position" : { x: -2, y: 0 }, "velocity" : { vx: 1, vy: 0  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: -1, vy: 0 });
+	});
+
+	it("should let high flying balls moving right pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: -2, y: 1 }, "velocity" : { vx: 1, vy: 0  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 1, vy: 0 });
+	});
+
+	it("should let low flying balls moving right pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: -2, y: -1 }, "velocity" : { vx: 1, vy: 0  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 1, vy: 0 });
+	});
+
+	it("should bounce back balls from the right", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 2, y: 0 }, "velocity" : { vx: -1, vy: 0  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 1, vy: 0 });
+	});
+
+	it("should let high flying balls moving left pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 2, y: 1 }, "velocity" : { vx: -1, vy: 0  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: -1, vy: 0 });
+	});
+
+	it("should let low flying balls moving left pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 2, y: -1 }, "velocity" : { vx: -1, vy: 0  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: -1, vy: 0 });
 	});
     });
 });

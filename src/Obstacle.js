@@ -74,8 +74,18 @@
 	defaults : {
 	    "position" : { x: 0, y:0 },
 	    "extend" : { width: 5, height: 3 }
-	}
-	
+	},
+
+	isHitBy : function(aBall) {
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    var ballPosition = aBall.get("position");
+	    return Math.abs(ballPosition.y - position.y) <= extend.height/2;
+	},
+
+	change : function(aBall) {
+	    aBall.reflectVx();
+	}	
     });
 
     Wish.Wall = Wall;
