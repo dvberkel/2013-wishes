@@ -90,7 +90,9 @@
 
 	isHitBy : function(aBall) {
 	    return (aBall.isHeadingRight() && this.isHitFromTheLeftBy(aBall)) ||
-		(aBall.isHeadingLeft() && this.isHitFromTheRightBy(aBall));
+		(aBall.isHeadingLeft() && this.isHitFromTheRightBy(aBall)) ||
+		(aBall.isHeadingUp() && this.isHitFromBelowBy(aBall)) ||
+		(aBall.isHeadingDown() && this.isHitFromAboveBy(aBall));
 	},
 
 	isHitFromTheRightBy : function(aBall){
@@ -98,7 +100,8 @@
 	    var extend = this.get("extend");
 	    var ballPosition = aBall.get("position");
 	    var ballVelocity = aBall.get("velocity");
-	    return is(this.rightExtend()).within(ballVelocity.vx).of(ballPosition.x) && is(ballPosition.y).within(extend.height/2).of(position.y);
+	    var result = is(this.rightExtend()).within(ballVelocity.vx).of(ballPosition.x) && is(ballPosition.y).within(extend.height/2).of(position.y);
+	    return result;
 	},
 
 	rightExtend : function(){
@@ -112,7 +115,8 @@
 	    var extend = this.get("extend");
 	    var ballPosition = aBall.get("position");
 	    var ballVelocity = aBall.get("velocity");
-	    return is(this.leftExtend()).within(ballVelocity.vx).of(ballPosition.x) && is(ballPosition.y).within(extend.height/2).of(position.y);
+	    var result = is(this.leftExtend()).within(ballVelocity.vx).of(ballPosition.x) && is(ballPosition.y).within(extend.height/2).of(position.y);
+	    return result;
 	},
 
 	leftExtend : function(){
@@ -121,8 +125,42 @@
 	    return position.x - extend.width/2;
 	},
 
+	isHitFromAboveBy : function(aBall){
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    var ballPosition = aBall.get("position");
+	    var ballVelocity = aBall.get("velocity");
+	    var result = is(this.aboveExtend()).within(ballVelocity.vy).of(ballPosition.y) && is(ballPosition.x).within(extend.width/2).of(position.x);
+	    return result;
+	},
+
+	aboveExtend : function(){
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    return position.y + extend.height/2;
+	},
+
+	isHitFromBelowBy : function(aBall){
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    var ballPosition = aBall.get("position");
+	    var ballVelocity = aBall.get("velocity");
+	    var result = is(this.belowExtend()).within(ballVelocity.vy).of(ballPosition.y) && is(ballPosition.x).within(extend.width/2).of(position.x);
+	    return result;
+	},
+
+	belowExtend : function(){
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    return position.y - extend.height/2;
+	},
+
 	change : function(aBall) {
-	    aBall.reflectVx();
+	    if (this.isHitFromTheLeftBy(aBall) || this.isHitFromTheRightBy(aBall)) {
+		aBall.reflectVx();
+	    } else {
+		aBall.reflectVy();
+	    }
 	}	
     });
 

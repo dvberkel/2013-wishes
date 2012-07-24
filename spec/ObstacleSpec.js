@@ -8,7 +8,7 @@ describe("an Obstacle", function(){
 	    var wall = new Wish.Wall();
 
 	    expect(wall).toBeLocatedAt(0);
-	})
+	});
 
 	it("should bounce back balls from the left", function(){
 	    var ball = new Wish.Ball({ "velocity" : { vx: 1, vy: 0  }});
@@ -166,6 +166,78 @@ describe("an Obstacle", function(){
 	    ball.update();
 
 	    expect(ball).toHaveVelocity({ vx: 1, vy: 0 });
+	});
+
+	it("should bounce back balls from below", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 0, y: -2 }, "velocity" : { vx: 0, vy: 1  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 0, vy: -1 });
+	});
+
+	it("should let far left flying balls moving up pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: -2, y: -2 }, "velocity" : { vx: 0, vy: 1 }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 0, vy: 1 });
+	});
+
+	it("should let far right flying balls moving up pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 2, y: -2 }, "velocity" : { vx: 0, vy: 1  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 0, vy: 1 });
+	});
+
+	it("should bounce back balls from above", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 0, y: 2 }, "velocity" : { vx: 0, vy: -1  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 0, vy: 1 });
+	});
+
+	it("should let far left flying balls moving down pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: -2, y: 2 }, "velocity" : { vx: 0, vy: -1  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 0, vy: -1 });
+	});
+
+	it("should let far right flying balls moving down pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 2, y: 2 }, "velocity" : { vx: 0, vy: -1  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 0, vy: -1 });
+	});
+
+	it("should let balls out of range moving down pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 0, y: 10 }, "velocity" : { vx: 0, vy: -1  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 0, vy: -1 });
+	});
+
+	it("should let balls out of range moving up pass", function(){
+	    var ball = new Wish.Ball({ "position" : { x: 0, y: -10 }, "velocity" : { vx: 0, vy: 1  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(ball).toHaveVelocity({ vx: 0, vy: 1 });
 	});
     });
 });
