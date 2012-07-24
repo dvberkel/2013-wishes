@@ -100,8 +100,14 @@
 	    var extend = this.get("extend");
 	    var ballPosition = aBall.get("position");
 	    var ballVelocity = aBall.get("velocity");
-	    var result = is(this.rightExtend()).within(ballVelocity.vx).of(ballPosition.x) && is(ballPosition.y).within(extend.height/2).of(position.y);
+	    var result = this.isRightExtendInRangeOf(aBall) && is(ballPosition.y).within(extend.height/2).of(position.y);
 	    return result;
+	},
+
+	isRightExtendInRangeOf : function(aBall){
+	    var ballPosition = aBall.get("position");
+	    var ballVelocity = aBall.get("velocity");
+	    return is(this.rightExtend()).within(ballVelocity.vx).of(ballPosition.x)
 	},
 
 	rightExtend : function(){
@@ -115,8 +121,14 @@
 	    var extend = this.get("extend");
 	    var ballPosition = aBall.get("position");
 	    var ballVelocity = aBall.get("velocity");
-	    var result = is(this.leftExtend()).within(ballVelocity.vx).of(ballPosition.x) && is(ballPosition.y).within(extend.height/2).of(position.y);
+	    var result = this.isLeftExtendInRangeOf(aBall) && is(ballPosition.y).within(extend.height/2).of(position.y);
 	    return result;
+	},
+
+	isLeftExtendInRangeOf : function(aBall) {
+	    var ballPosition = aBall.get("position");
+	    var ballVelocity = aBall.get("velocity");
+	    return is(this.leftExtend()).within(ballVelocity.vx).of(ballPosition.x)
 	},
 
 	leftExtend : function(){
@@ -130,8 +142,14 @@
 	    var extend = this.get("extend");
 	    var ballPosition = aBall.get("position");
 	    var ballVelocity = aBall.get("velocity");
-	    var result = is(this.aboveExtend()).within(ballVelocity.vy).of(ballPosition.y) && is(ballPosition.x).within(extend.width/2).of(position.x);
+	    var result = this.isAboveExtendInRangeOf(aBall) && is(ballPosition.x).within(extend.width/2).of(position.x);
 	    return result;
+	},
+
+	isAboveExtendInRangeOf : function(aBall) {
+	    var ballPosition = aBall.get("position");
+	    var ballVelocity = aBall.get("velocity");
+	    return is(this.aboveExtend()).within(ballVelocity.vy).of(ballPosition.y)
 	},
 
 	aboveExtend : function(){
@@ -145,8 +163,14 @@
 	    var extend = this.get("extend");
 	    var ballPosition = aBall.get("position");
 	    var ballVelocity = aBall.get("velocity");
-	    var result = is(this.belowExtend()).within(ballVelocity.vy).of(ballPosition.y) && is(ballPosition.x).within(extend.width/2).of(position.x);
+	    var result = this.isBelowExtendInRangeOf(aBall) && is(ballPosition.x).within(extend.width/2).of(position.x);
 	    return result;
+	},
+
+	isBelowExtendInRangeOf : function(aBall){
+	    var ballPosition = aBall.get("position");
+	    var ballVelocity = aBall.get("velocity");
+	    return is(this.belowExtend()).within(ballVelocity.vy).of(ballPosition.y)
 	},
 
 	belowExtend : function(){
