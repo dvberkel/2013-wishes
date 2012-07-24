@@ -51,6 +51,10 @@
 
 	isHeadingDown : function(){
 	    return this.get("velocity").vy < 0;
+	},
+
+	capture : function(){
+	    this.trigger("captured");
 	}
     });
 
