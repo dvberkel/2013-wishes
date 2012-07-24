@@ -96,12 +96,7 @@
 	},
 
 	isHitFromTheRightBy : function(aBall){
- 	    var position = this.get("position");
-	    var extend = this.get("extend");
-	    var ballPosition = aBall.get("position");
-	    var ballVelocity = aBall.get("velocity");
-	    var result = this.isRightExtendInRangeOf(aBall) && is(ballPosition.y).within(extend.height/2).of(position.y);
-	    return result;
+	    return this.isRightExtendInRangeOf(aBall) && this.coversVertically(aBall);
 	},
 
 	isRightExtendInRangeOf : function(aBall){
@@ -109,6 +104,14 @@
 	    var ballVelocity = aBall.get("velocity");
 	    return is(this.rightExtend()).within(ballVelocity.vx).of(ballPosition.x)
 	},
+	
+	coversVertically : function(aBall){
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    var ballPosition = aBall.get("position");
+	    return is(ballPosition.y).within(extend.height/2).of(position.y);
+	},
+
 
 	rightExtend : function(){
  	    var position = this.get("position");
@@ -117,12 +120,7 @@
 	},
 
 	isHitFromTheLeftBy : function(aBall){
- 	    var position = this.get("position");
-	    var extend = this.get("extend");
-	    var ballPosition = aBall.get("position");
-	    var ballVelocity = aBall.get("velocity");
-	    var result = this.isLeftExtendInRangeOf(aBall) && is(ballPosition.y).within(extend.height/2).of(position.y);
-	    return result;
+	    return this.isLeftExtendInRangeOf(aBall) && this.coversVertically(aBall);
 	},
 
 	isLeftExtendInRangeOf : function(aBall) {
@@ -138,18 +136,20 @@
 	},
 
 	isHitFromAboveBy : function(aBall){
- 	    var position = this.get("position");
-	    var extend = this.get("extend");
-	    var ballPosition = aBall.get("position");
-	    var ballVelocity = aBall.get("velocity");
-	    var result = this.isAboveExtendInRangeOf(aBall) && is(ballPosition.x).within(extend.width/2).of(position.x);
-	    return result;
+	    return this.isAboveExtendInRangeOf(aBall) && this.coversHorizontally(aBall);
 	},
 
 	isAboveExtendInRangeOf : function(aBall) {
 	    var ballPosition = aBall.get("position");
 	    var ballVelocity = aBall.get("velocity");
 	    return is(this.aboveExtend()).within(ballVelocity.vy).of(ballPosition.y)
+	},
+
+	coversHorizontally : function(aBall){
+ 	    var position = this.get("position");
+	    var extend = this.get("extend");
+	    var ballPosition = aBall.get("position");
+	    return is(ballPosition.x).within(extend.width/2).of(position.x)
 	},
 
 	aboveExtend : function(){
@@ -159,12 +159,7 @@
 	},
 
 	isHitFromBelowBy : function(aBall){
- 	    var position = this.get("position");
-	    var extend = this.get("extend");
-	    var ballPosition = aBall.get("position");
-	    var ballVelocity = aBall.get("velocity");
-	    var result = this.isBelowExtendInRangeOf(aBall) && is(ballPosition.x).within(extend.width/2).of(position.x);
-	    return result;
+	    return this.isBelowExtendInRangeOf(aBall) && this.coversHorizontally(aBall);
 	},
 
 	isBelowExtendInRangeOf : function(aBall){
