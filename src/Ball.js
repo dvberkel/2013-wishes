@@ -58,5 +58,30 @@
 	}
     });
 
-     Wish.Ball = Ball;
+    BallView = Backbone.View.extend({
+	initialize : function(){
+	    this.model.bind("change:position", function(){
+		this.render();
+	    }, this);
+	    
+	    this.render();
+	},
+
+	render : function(){
+	    var paper = this.paper();
+	    var ball = this.model;
+	    var position = ball.get("position");
+	    paper.circle(position.x, position.y, 5).attr({
+		"fill" : "black",
+		"stroke" : "none"
+	    });
+	},
+
+	paper : function(){
+	    return this.options.paper;
+	}
+    });
+
+    Wish.Ball = Ball;
+    Wish.BallView = BallView;
 })(_, Backbone, Wish);

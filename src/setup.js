@@ -15,5 +15,8 @@
 	new Wish.WallView({ "model" : rightWall, "paper" : paper });
 	var ceiling = new Wish.Ceiling({ y: height });
 	new Wish.CeilingView({ "model" : ceiling, "paper" : paper });
+
+	var ball = new Wish.Ball({ "position" : { x: 50, y: 30}, "velocity" : { vx: 1, vy: 1}});
+	new Wish.BallView({ "model" : ball, "paper" : paper });
     });
 })(jQuery, Raphael, Wish);
