@@ -15,7 +15,7 @@
 	observe : function(aBall){
 	    aBall.bind("change:position", function(ball){
 		if (this.isHitBy(ball)) {
-		    this.change(ball);
+		    this.changeBall(ball);
 		}
 	    }, this);
 	},
@@ -61,7 +61,7 @@
 	    return this.isInHorizontalRangeOf(aBall);
 	},
 
-	change : function(aBall) {
+	changeBall : function(aBall) {
 	    aBall.reflectVx();
 	}	
     });
@@ -77,7 +77,7 @@
 	    return this.isInVerticalRange(aBall);
 	},
 
-	change : function(aBall) {
+	changeBall : function(aBall) {
 	    aBall.reflectVy();
 	}
     });
@@ -174,7 +174,7 @@
 	    return position.y - extend.height/2;
 	},
 
-	change : function(aBall) {
+	changeBall : function(aBall) {
 	    if (this.isHitFromTheLeftBy(aBall) || this.isHitFromTheRightBy(aBall)) {
 		aBall.reflectVx();
 	    } else {
