@@ -1,23 +1,32 @@
 beforeEach(function() {
     this.addMatchers({
 	toBeAt : function(expectedPosition) {
-	    actualPosition = this.actual.get("position");
+	    var actualPosition = this.actual.get("position");
 	    return actualPosition.x === expectedPosition.x && actualPosition.y === expectedPosition.y;
 	},
 
 	toHaveVelocity : function(expectedVelocity) {
-	    actualVelocity = this.actual.get("velocity");
+	    var actualVelocity = this.actual.get("velocity");
 	    return actualVelocity.vx === expectedVelocity.vx && actualVelocity.vy === expectedVelocity.vy;
 	},
 
 	toBeLocatedAt : function(expectedLocation){
-	    actualLocation = this.actual.get("x");
+	    var actualLocation = this.actual.get("x");
 	    return actualLocation === expectedLocation;
 	},
 
 	toHaveExtend : function(expectedExtend){
-	    actualExtend = this.actual.get("extend");
+	    var actualExtend = this.actual.get("extend");
 	    return actualExtend.width === expectedExtend.width && actualExtend.height === expectedExtend.height;
+	},
+	
+	toBeInstanceOf : function(expectedSuper){
+	    return this.actual instanceof expectedSuper;
+	},
+
+	toHaveDisplacementSize : function(expectedDisplacementSize) {
+	    return this.actual.get("displacementSize") === expectedDisplacementSize;
 	}
+
     });
 });
