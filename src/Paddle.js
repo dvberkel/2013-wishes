@@ -20,5 +20,30 @@
 	}
     });
 
+    var PaddleView = Backbone.View.extend({
+	initialize : function(){
+	    this.model.bind("change:position", function(){
+		this.render();
+	    }, this);
+
+	    this.render();
+	},
+
+	render : function(){
+	    var paper = this.paper();
+	    var paddle = this.model;
+	    var position = paddle.get("position");
+	    var extend = paddle.get("extend");
+	    var width = extend.width;
+	    var height = extend.height;
+	    paper.rect(position.x - extend.width/2, position.y - extend.height/2, width, height);
+	},
+
+	paper : function(){
+	    return this.options.paper;
+	}
+    });
+
     Wish.Paddle = Paddle;
+    Wish.PaddleView = PaddleView;
 })(Backbone, Wish);

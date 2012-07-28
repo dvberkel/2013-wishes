@@ -17,6 +17,9 @@
 	new Wish.CeilingView({ "model" : ceiling, "paper" : paper });
 
 	var ball = new Wish.Ball({ "position" : { x: 50, y: 30}, "velocity" : { vx: 1, vy: 1}});
-	new Wish.BallView({ "model" : ball, "paper" : paper });
+	new Wish.BallView({ "model" : ball, "paper": paper });
+
+	var paddle = new Wish.Paddle({ "position" : { x: width/2, y: 20 }, "extend" : { "width": 40, "height": 10 }});
+	new Wish.PaddleView({ "model": paddle, "paper": paper});
     });
 })(jQuery, Raphael, Wish);
