@@ -183,7 +183,28 @@
 	}	
     });
 
+    var WallView = Backbone.View.extend({
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function() {
+	    var paper = this.paper();
+	    var width = this.options.width || 1;
+	    var height = paper.height;
+	    var x = this.model.get("x");
+	    paper.rect(x - width/2, 0, width, height);
+	},
+
+	paper : function(){
+	    return this.options.paper;
+	}
+    });
+
     Wish.Wall = Wall;
     Wish.Ceiling = Ceiling;
     Wish.Brick = Brick;
+
+    Wish.WallView = WallView;
+
 })(_, Backbone, Wish);

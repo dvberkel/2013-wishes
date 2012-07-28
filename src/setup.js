@@ -6,5 +6,13 @@
 	    "stroke": "none"
 	});
 	
+	var width = paper.width;
+	var height = paper.height;
+
+	var leftWall = new Wish.Wall({ x: 0 });
+	new Wish.WallView({ "model" : leftWall, "paper" : paper });
+	var rightWall = new Wish.Wall({ x: width });
+	new Wish.WallView({ "model" : rightWall, "paper" : paper });
+	
     });
 })(jQuery, Raphael, Wish);
