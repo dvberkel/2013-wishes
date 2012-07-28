@@ -13,6 +13,7 @@
 	new Wish.WallView({ "model" : leftWall, "paper" : paper });
 	var rightWall = new Wish.Wall({ x: width });
 	new Wish.WallView({ "model" : rightWall, "paper" : paper });
-	
+	var ceiling = new Wish.Ceiling({ y: height });
+	new Wish.CeilingView({ "model" : ceiling, "paper" : paper });
     });
 })(jQuery, Raphael, Wish);

@@ -201,10 +201,28 @@
 	}
     });
 
+    var CeilingView = Backbone.View.extend({
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function() {
+	    var paper = this.paper();
+	    var width = paper.width;
+	    var height = this.options.height || 1;
+	    var y = this.model.get("y");
+	    paper.rect(0, y - height/2, width, height);
+	},
+
+	paper : function(){
+	    return this.options.paper;
+	}
+    });
+
     Wish.Wall = Wall;
     Wish.Ceiling = Ceiling;
     Wish.Brick = Brick;
 
     Wish.WallView = WallView;
-
+    Wish.CeilingView = CeilingView;
 })(_, Backbone, Wish);
