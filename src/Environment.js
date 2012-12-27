@@ -38,7 +38,7 @@
 		}
 	    }
 	    
-	    ball.on("captured", function(){
+	    ball.on("change:captured", function(){
 		ball.set("velocity", { vx : 0, vy : 0 });
 		paddle.on("change:position", function(){
 		    var position = this.get("position");

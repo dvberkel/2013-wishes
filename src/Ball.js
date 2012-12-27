@@ -16,7 +16,8 @@
     var Ball = Backbone.Model.extend({
 	defaults : {
 	    "position" : { x: 0, y: 0 },
-	    "velocity" : { vx: 1, vy: 1 }
+	    "velocity" : { vx: 1, vy: 1 },
+	    "captured" : false
 	},
 
 	update : function(){
@@ -53,8 +54,13 @@
 	    return this.get("velocity").vy < 0;
 	},
 
+	isCaptured : function(){
+	    return this.get("captured");
+	},
+	
+
 	capture : function(){
-	    this.trigger("captured");
+	    this.set("captured", true);
 	}
     });
 
