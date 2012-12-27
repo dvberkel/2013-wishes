@@ -30,13 +30,23 @@
 	},
 
 	render : function(){
-	    var paper = this.paper();
+	    var avatar = this.avatar();
 	    var paddle = this.model;
 	    var position = paddle.get("position");
 	    var extend = paddle.get("extend");
-	    var width = extend.width;
-	    var height = extend.height;
-	    paper.rect(position.x - extend.width/2, position.y - extend.height/2, width, height);
+	    avatar.attr({
+		x : position.x - extend.width/2,
+		y : position.y - extend.height/2,
+	    });
+	},
+
+	avatar : function(){
+	    if (! this._avatar) {
+		var paper = this.paper();
+		var extend = this.model.get("extend");
+		this._avatar = paper.rect(0, 0, extend.width, extend.height, extend.height/2);
+	    }
+	    return this._avatar;
 	},
 
 	paper : function(){

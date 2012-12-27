@@ -23,6 +23,14 @@
 
 	update : function(){
 	    this.get("ball").update();
+	},
+
+	movePaddleLeft : function(){
+	    this.get("paddle").moveLeft();
+	},
+
+	movePaddleRight : function(){
+	    this.get("paddle").moveRight();
 	}
     });
 
