@@ -10,27 +10,6 @@
             };
     })();
 
-    const leftKey = 37;
-    const rightKey = 39;
-    var pressed = {
-	leftKey : false,
-	rightKey : false
-    }
-    function keydown(evt){
-        var key = evt.keyCode;
-	if (key == leftKey || key == rightKey) {
-	    pressed[key] = true;
-	}
-    };
-    function keyup(evt){
-        var key = evt.keyCode;
-	if (key == leftKey || key == rightKey) {
-	    pressed[key] = false;
-	}
-    };
-    window.addEventListener("keydown",keydown);
-    window.addEventListener("keyup",keyup);
-
     $(function(){
 	var paper = Raphael("screen", 640, 480);
 	paper.rect(0, 0, 640, 480).attr({
@@ -44,12 +23,6 @@
 	(function loop(){
 	    requestAnimFrame(loop);
 	    environment.update();
-	    if (pressed[leftKey]) {
-		environment.movePaddleLeft();
-	    }
-	    if (pressed[rightKey]) {
-		environment.movePaddleRight();
-	    }
 	})();
     });
 })(jQuery, Raphael, Wish);

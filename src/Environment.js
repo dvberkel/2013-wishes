@@ -3,7 +3,7 @@
 	initialize : function(){
 	    var width = this.get("width");
 	    var height = this.get("height");
-
+	    
 	    var ball = new Wish.Ball({ "position" : { x: 50, y: 30}, "velocity" : { vx: 1, vy: 1}});
 
 	    var observers = {
@@ -19,10 +19,18 @@
 	    
 	    this.set("ball", ball);
 	    this.set(observers);
+	    this.set("key", new Wish.Key());
 	},
 
 	update : function(){
 	    this.get("ball").update();
+	    var key = this.get("key");
+	    if (key.pressedLeft()) {
+		this.movePaddleLeft();
+	    }
+	    if (key.pressedRight()) {
+		this.movePaddleRight();
+	    }
 	},
 
 	movePaddleLeft : function(){
