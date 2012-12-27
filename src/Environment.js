@@ -6,9 +6,13 @@
 	    var horizontalBrickCount = this.get("horizontalBrickCount");
 	    var verticalBrickCount = this.get("verticalBrickCount");
 	    var velocity = this.get("velocity");
+	    var paddleExtend = this.get("paddleExtend");
 
 	    var ball = new Wish.Ball({ "position" : { x: 50, y: 30}, "velocity" : velocity});
-	    var paddle = new Wish.Paddle({ "position" : { x: width/2, y: 20 } });
+	    var paddle = new Wish.Paddle({ 
+		"position" : { x: width/2, y: 20 },
+		"extend" : paddleExtend
+	    });
 
 	    var observers = {
 		"leftWall" : new Wish.Wall({ x: 0 }),

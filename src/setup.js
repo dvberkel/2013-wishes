@@ -20,7 +20,8 @@
 	var environment = new Wish.Environment({ 
 	    "width" : paper.width, "height" : paper.height,
 	    "horizontalBrickCount" : 10, "verticalBrickCount" : 3,
-	    "velocity" : { vx : 1, vy : 1 }
+	    "velocity" : { vx : 2.5, vy : 4 },
+	    "paddleExtend" : { width : 80, height : 10 }
 	});
 	new Wish.EnvironmentView({ "model" : environment, "paper" : paper });
 
