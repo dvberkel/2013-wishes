@@ -219,10 +219,30 @@
 	}
     });
 
+    var BrickView = Backbone.View.extend({
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function() {
+	    var paper = this.paper();
+	    var position = this.model.get("position");
+	    var extend = this.model.get("extend");
+	    var brick = paper.rect(
+		position.x - extend.width/2, position.y - extend.height/2, extend.width, extend.height, 3);
+	    brick.attr({ stroke : "red", fill : "green" });
+	},
+
+	paper : function(){
+	    return this.options.paper;
+	}
+    });
+
     Wish.Wall = Wall;
     Wish.Ceiling = Ceiling;
     Wish.Brick = Brick;
 
     Wish.WallView = WallView;
     Wish.CeilingView = CeilingView;
+    Wish.BrickView = BrickView;
 })(_, Backbone, Wish);

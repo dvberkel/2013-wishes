@@ -3,7 +3,9 @@
 	initialize : function(){
 	    var width = this.get("width");
 	    var height = this.get("height");
-	    
+	    var horizontalBrickCount = this.get("horizontalBrickCount");
+	    var verticalBrickCount = this.get("verticalBrickCount");
+
 	    var ball = new Wish.Ball({ "position" : { x: 50, y: 30}, "velocity" : { vx: 1, vy: 1}});
 
 	    var observers = {
@@ -17,8 +19,26 @@
 		observers[key].observe(ball);
 	    }
 	    
+	    var bricks = [];
+	    var brickWidth = width / horizontalBrickCount;
+	    var brickHeight = 20;
+	    for (var x = 0; x < horizontalBrickCount; x++) {
+		for(var y = 0; y < verticalBrickCount; y++) {
+		    var brick = new Wish.Brick({
+			position : { 
+			    "x" : (x + 0.5) * brickWidth, 
+			    "y" : (y + 0.5) * brickHeight + height/2
+			},
+			extend : { "width" : brickWidth, "height" : brickHeight }
+		    });
+		    brick.observe(ball);
+		    bricks.push(brick);
+		}
+	    }
+	    
 	    this.set("ball", ball);
 	    this.set(observers);
+	    this.set("bricks", bricks);
 	    this.set("key", new Wish.Key());
 	},
 
@@ -56,6 +76,9 @@
 	    new Wish.CeilingView({ "model" : model.get("ceiling"), "paper" : paper });
 	    new Wish.BallView({ "model" : model.get("ball"), "paper": paper });
 	    new Wish.PaddleView({ "model": model.get("paddle"), "paper": paper});	    
+	    _.each(this.model.get("bricks"), function(brick){
+		new Wish.BrickView({ "model" : brick, "paper" : paper });
+	    });
 	}
     });
 

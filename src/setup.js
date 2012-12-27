@@ -17,8 +17,11 @@
 	    "stroke": "none"
 	});
 	
-	var environment = new Wish.Environment({ "width" : paper.width, "height" : paper.height });
-	new Wish.EnvironmentView({ "model" : environment, "paper" : paper});
+	var environment = new Wish.Environment({ 
+	    "width" : paper.width, "height" : paper.height,
+	    "horizontalBrickCount" : 10, "verticalBrickCount" : 3
+	});
+	new Wish.EnvironmentView({ "model" : environment, "paper" : paper });
 
 	(function loop(){
 	    requestAnimFrame(loop);
