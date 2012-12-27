@@ -7,12 +7,14 @@
 	    var verticalBrickCount = this.get("verticalBrickCount");
 
 	    var ball = new Wish.Ball({ "position" : { x: 50, y: 30}, "velocity" : { vx: 1, vy: 1}});
+	    var paddle = new Wish.Paddle({ "position" : { x: width/2, y: 20 } });
 
 	    var observers = {
 		"leftWall" : new Wish.Wall({ x: 0 }),
 		"rightWall" : new Wish.Wall({ x: width }),
 		"ceiling" : new Wish.Ceiling({ y: height }),
-		"paddle" : new Wish.Paddle({ "position" : { x: width/2, y: 20 } })
+		"well" : new Wish.Well({ y : 0 }),
+		"paddle" : paddle
 	    };
 
 	    for (key in observers) {
@@ -36,6 +38,16 @@
 		}
 	    }
 	    
+	    ball.on("captured", function(){
+		ball.set("velocity", { vx : 0, vy : 0 });
+		paddle.on("change:position", function(){
+		    var position = this.get("position");
+		    var paddleHeight = this.get("extend").height;
+		    ball.set("position", { x : position.x, y : position.y + paddleHeight})
+		}, paddle);
+		paddle.trigger("change:position");
+	    });
+
 	    this.set("ball", ball);
 	    this.set(observers);
 	    this.set("bricks", bricks);
