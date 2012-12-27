@@ -11,6 +11,10 @@
 	    this.set("ball", new Wish.Ball({ "position" : { x: 50, y: 30}, "velocity" : { vx: 1, vy: 1}}));
 
 	    this.set("paddle",new Wish.Paddle({ "position" : { x: width/2, y: 20 }, "extend" : { "width": 40, "height": 10 }}));
+	},
+
+	update : function(){
+	    this.get("ball").update();
 	}
     });
 

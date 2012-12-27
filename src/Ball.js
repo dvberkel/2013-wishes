@@ -68,13 +68,24 @@
 	},
 
 	render : function(){
-	    var paper = this.paper();
+	    var avatar = this.avatar();
 	    var ball = this.model;
 	    var position = ball.get("position");
-	    paper.circle(position.x, position.y, 5).attr({
-		"fill" : "black",
-		"stroke" : "none"
+	    avatar.attr({
+		"cx" : position.x,
+		"cy" : position.y
 	    });
+	},
+
+	avatar : function(){
+	    if (! this._avatar) {
+		var paper = this.paper();
+		this._avatar = paper.circle(0, 0, 5).attr({
+		    "fill" : "black",
+		    "stroke" : "none"
+		})
+	    }
+	    return this._avatar;
 	},
 
 	paper : function(){
