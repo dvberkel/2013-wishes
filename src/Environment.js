@@ -38,15 +38,19 @@
 		}
 	    }
 	    
+	    this._followCallback = function() {
+		var position = paddle.get("position");
+		var paddleHeight = paddle.get("extend").height;
+		ball.set("position", { x : position.x, y : position.y + paddleHeight})
+	    };
+
 	    ball.on("change:captured", function(){
-		ball.set("velocity", { vx : 0, vy : 0 });
-		paddle.on("change:position", function(){
-		    var position = this.get("position");
-		    var paddleHeight = this.get("extend").height;
-		    ball.set("position", { x : position.x, y : position.y + paddleHeight})
-		}, paddle);
-		paddle.trigger("change:position");
-	    });
+		if (ball.isCaptured()) {
+		    ball.set("velocity", { vx : 0, vy : 0 });
+		    paddle.on("change:position", this._followCallback, paddle);
+		    paddle.trigger("change:position");
+		}
+	    }, this);
 
 	    this.set("ball", ball);
 	    this.set(observers);
@@ -62,6 +66,15 @@
 	    }
 	    if (key.pressedRight()) {
 		this.movePaddleRight();
+	    }
+	    if (key.pressedSpace()) {
+ 		var ball = this.get("ball");
+		if (ball.isCaptured()) {
+		    var paddle = this.get("paddle");
+		    paddle.off("change:position", this._followCallback);
+		    ball.set("captured", false);
+		    ball.set("velocity", { vx : 1, vy : 1 });
+		}
 	    }
 	},
 

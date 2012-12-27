@@ -1,6 +1,7 @@
 (function(_, Wish, undefined){
     var Key = function(){
 	var keys = {
+	    "Space" : 32,
 	    "Left" : 37, 
 	    "Right" : 39
 	};
