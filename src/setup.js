@@ -19,7 +19,8 @@
 	
 	var environment = new Wish.Environment({ 
 	    "width" : paper.width, "height" : paper.height,
-	    "horizontalBrickCount" : 10, "verticalBrickCount" : 3
+	    "horizontalBrickCount" : 10, "verticalBrickCount" : 3,
+	    "velocity" : { vx : 1, vy : 1 }
 	});
 	new Wish.EnvironmentView({ "model" : environment, "paper" : paper });
 

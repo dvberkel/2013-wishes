@@ -5,8 +5,9 @@
 	    var height = this.get("height");
 	    var horizontalBrickCount = this.get("horizontalBrickCount");
 	    var verticalBrickCount = this.get("verticalBrickCount");
+	    var velocity = this.get("velocity");
 
-	    var ball = new Wish.Ball({ "position" : { x: 50, y: 30}, "velocity" : { vx: 1, vy: 1}});
+	    var ball = new Wish.Ball({ "position" : { x: 50, y: 30}, "velocity" : velocity});
 	    var paddle = new Wish.Paddle({ "position" : { x: width/2, y: 20 } });
 
 	    var observers = {
@@ -46,7 +47,7 @@
 
 	    ball.on("change:captured", function(){
 		if (ball.isCaptured()) {
-		    ball.set("velocity", { vx : 0, vy : 0 });
+		    ball.set("velocity", { vx : 0 , vy : 0});
 		    paddle.on("change:position", this._followCallback, paddle);
 		    paddle.trigger("change:position");
 		}
@@ -73,7 +74,7 @@
 		    var paddle = this.get("paddle");
 		    paddle.off("change:position", this._followCallback);
 		    ball.set("captured", false);
-		    ball.set("velocity", { vx : 1, vy : 1 });
+		    ball.set("velocity", this.get("velocity"));
 		}
 	    }
 	},
