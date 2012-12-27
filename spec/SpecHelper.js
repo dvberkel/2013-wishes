@@ -26,7 +26,10 @@ beforeEach(function() {
 
 	toHaveDisplacementSize : function(expectedDisplacementSize) {
 	    return this.actual.get("displacementSize") === expectedDisplacementSize;
-	}
+	},
 
+	toBeDestroyed : function() {
+	    return this.actual.get("destroyed") === true;
+	}			 
     });
 });

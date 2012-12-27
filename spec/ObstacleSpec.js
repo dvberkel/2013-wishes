@@ -239,5 +239,14 @@ describe("an Obstacle", function(){
 
 	    expect(ball).toHaveVelocity({ vx: 0, vy: 1 });
 	});
+
+	it("should be destroyed when hit by a ball", function(){
+	    var ball = new Wish.Ball({ "position" : { x: -2, y: 0 }, "velocity" : { vx: 1, vy: 0  }});
+	    brick.observe(ball);
+
+	    ball.update();
+
+	    expect(brick).toBeDestroyed();
+	});
     });
 });

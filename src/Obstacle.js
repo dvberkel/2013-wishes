@@ -13,12 +13,18 @@
 
     var Obstacle = Backbone.Model.extend({
 	observe : function(aBall){
-	    aBall.bind("change:position", function(ball){
+	    var observeCallback = function(ball){
 		if (this.isHitBy(ball)) {
 		    this.changeBall(ball);
 		}
-	    }, this);
+	    };
+	    aBall.bind("change:position", observeCallback, this);
+	    this.unobserve = function(){
+		aBall.off("change:position", observeCallback);
+	    }
 	},
+
+	
 
 	isHitFromLeftBy : function(aBall) {
 	    return aBall.isHeadingRight() && this.isInRangeOf(aBall);
@@ -85,7 +91,8 @@
     var Brick = Obstacle.extend({
 	defaults : {
 	    "position" : { x: 0, y:0 },
-	    "extend" : { width: 5, height: 3 }
+	    "extend" : { width: 5, height: 3 },
+	    "destroyed" : false
 	},
 
 	isHitBy : function(aBall) {
@@ -180,6 +187,7 @@
 	    } else {
 		aBall.reflectVy();
 	    }
+	    this.set("destroyed", true);
 	}	
     });
 
@@ -222,19 +230,33 @@
     var BrickView = Backbone.View.extend({
 	initialize : function(){
 	    this.render();
+	    this.model.on("change:destroyed", this.remove, this);
 	},
 
 	render : function() {
-	    var paper = this.paper();
+	    var avatar = this.avatar();
 	    var position = this.model.get("position");
 	    var extend = this.model.get("extend");
-	    var brick = paper.rect(
-		position.x - extend.width/2, position.y - extend.height/2, extend.width, extend.height, 3);
-	    brick.attr({ stroke : "red", fill : "green" });
+	    avatar.attr({ x : position.x - extend.width/2, y : position.y - extend.height / 2});
+	},
+
+	avatar : function() {
+	    if (! this._avatar) {
+		var paper = this.paper();
+		var extend = this.model.get("extend");
+		this._avatar = paper.rect(0, 0, extend.width, extend.height, 3);
+		this._avatar.attr({ stroke : "red", fill : "green" });
+	    }
+	    return this._avatar;
 	},
 
 	paper : function(){
 	    return this.options.paper;
+	},
+
+	remove : function(){
+	    this.avatar().remove();
+	    this.model.unobserve();
 	}
     });
 
