@@ -2,7 +2,7 @@
     var Paddle = Wish.Brick.extend({
 	defaults : {
 	    "position" : { x: 0, y:0 },
-	    "extend" : { width: 5, height: 3 },
+	    "extend" : { width: 40, height: 10 },
 	    "displacementSize" : 3
 	},
 
