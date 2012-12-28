@@ -10,8 +10,11 @@
 	    text.attr({
 		"text-anchor" : "start",
 		"font-family" : "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+		"font" : "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
 		"font-size" : 10
 	    });
+	    var bbox = text.getBBox();
+	    text.translate(0, bbox.height/2);
 	},
 
 	paper : function(){
