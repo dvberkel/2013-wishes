@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta encoding="utf-8"/>
+    <title>2013 Wish Admin</title>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery.base64.min.js"></script>
+    <script type="text/javascript">
+      var createLink = function(){
+        var message = $("#wish").val();
+
+        var parameters = "index.html?w=" + escape($.base64.encode(message));
+
+        return parameters;
+      };
+
+      var changeLink = function(){
+        var link = createLink();
+        $("#link").empty().append(link).attr("href", link);
+      };
+
+      $(function(){
+        $("#wish").change(changeLink);
+        changeLink();
+      });
+    </script>
+  </head>
+  <body>
+    <a id="link" href="index.html"></a>
+    <textarea id="wish">Have a wonderfull 2013!</textarea>
+  </body>
+</html>
