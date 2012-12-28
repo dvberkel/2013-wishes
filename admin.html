@@ -7,9 +7,14 @@
     <script type="text/javascript" src="lib/jquery.base64.min.js"></script>
     <script type="text/javascript">
       var createLink = function(){
-        var message = $("#wish").val();
+        var horizontalBrickCount = $("#horizontalBrickCount").val();
+        var verticalBrickCount = $("#verticalBrickCount").val();
+        var wish = $("#wish").val();
 
-        var parameters = "index.html?w=" + escape($.base64.encode(message));
+        var parameters = "index.html?";
+        parameters += "u=" + horizontalBrickCount;
+        parameters += "&v=" + verticalBrickCount;
+        parameters += "&w=" + escape($.base64.encode(wish));
 
         return parameters;
       };
@@ -20,13 +25,15 @@
       };
 
       $(function(){
-        $("#wish").change(changeLink);
+        $("#wish, #horizontalBrickCount, #verticalBrickCount").change(changeLink);
         changeLink();
       });
     </script>
   </head>
   <body>
     <a id="link" href="index.html"></a><br>
+    Horizontal: <input id="horizontalBrickCount" type="text" value="10"/>
+    Vertical: <input id="verticalBrickCount" type="text" value="3"/>
     <textarea id="wish" style="box-sizing: border-box; width: 100%; height: 480px;">Have a wonderfull 2013!</textarea>
   </body>
 </html>
