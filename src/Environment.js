@@ -101,6 +101,7 @@
 	    var paper = this.options.paper;
 	    var model = this.model;
 
+	    new Wish.TextView({ "model": model, "paper" : paper });
 	    new Wish.WallView({ "model" : model.get("leftWall"), "paper" : paper });
 	    new Wish.WallView({ "model" : model.get("rightWall"), "paper" : paper });
 	    new Wish.CeilingView({ "model" : model.get("ceiling"), "paper" : paper });

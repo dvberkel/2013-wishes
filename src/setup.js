@@ -21,7 +21,8 @@
 	    "width" : paper.width, "height" : paper.height,
 	    "horizontalBrickCount" : 10, "verticalBrickCount" : 3,
 	    "velocity" : { vx : 2.5, vy : 4 },
-	    "paddleExtend" : { width : 80, height : 10 }
+	    "paddleExtend" : { width : 80, height : 10 },
+	    "wish" : "Have a wonderfull 2013!"
 	});
 	new Wish.EnvironmentView({ "model" : environment, "paper" : paper });
 
