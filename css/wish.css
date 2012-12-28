@@ -1,0 +1,15 @@
+h1 {
+    text-align: center;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-size: 200%;
+}
+
+h1 + h1 {
+    font-size: 150%;
+}
+
+h1, svg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
