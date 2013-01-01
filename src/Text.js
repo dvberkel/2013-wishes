@@ -11,7 +11,9 @@
 		"text-anchor" : "start",
 		"font-family" : "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
 		"font" : "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
-		"font-size" : 10
+		"font-size" : 15,
+		"stroke" : "yellow",
+		"fill" : "yellow"
 	    });
 	    var bbox = text.getBBox();
 	    text.translate(0, bbox.height/2);
