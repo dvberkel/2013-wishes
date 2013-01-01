@@ -17,10 +17,7 @@
 
     $(function(){
 	var paper = Raphael("screen", 640, 480);
-	paper.rect(0, 0, 640, 480).attr({
-	    "fill": "#eeeeee",
-	    "stroke": "none"
-	});
+	paper.image("img/family.jpeg", 0, 0, 640, 480);
 	
 	var environment = new Wish.Environment({ 
 	    "width" : paper.width, "height" : paper.height,
